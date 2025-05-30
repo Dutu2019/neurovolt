@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Navbar() {
   return (
     <nav className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-center items-center py-6 relative h-[100px] space-x-20">
+      <div className="hidden md:block max-w-7xl mx-auto px-6">
+        <div className="flex justify-between items-center py-6 relative h-[100px]">
           {/* Left Navigation Links */}
           <Link
             href="/about"

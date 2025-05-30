@@ -2,6 +2,7 @@ import "./globals.css";
 import { blinker } from "@/app/ui/fonts";
 
 import Nav from "@/app/ui/Nav";
+import Footer from "./ui/Footer";
 
 export default function RootLayout({
   children,
@@ -13,6 +14,7 @@ export default function RootLayout({
       <body className={`${blinker} antialiased`}>
         <Nav />
         {children}
+        <Footer/>
       </body>
     </html>
   );
