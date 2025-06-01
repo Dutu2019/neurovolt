@@ -15,11 +15,11 @@ export default function Footer() {
           <input
             type="email"
             placeholder="Courriel"
-            className="text-lg text-center bg-white w-80 h-12 focus:outline-none"
+            className="text-lg text-center text-black placeholder-gray bg-white w-80 h-12 focus:outline-none"
           />
           <button
             type="submit"
-            className="bg-black text-white font-semibold h-12 px-5"
+            className="bg-black hover:underline text-white font-semibold h-12 px-5"
           >
             S'abonner
           </button>
