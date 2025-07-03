@@ -5,6 +5,3 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production]
 name = "neurovolt-production"
-
-[env.staging]
-name = "neurovolt-staging" 
