@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#7B2634] text-white relative">
+    <section className="bg-primary text-primary-content relative">
       {/* Top Logo and Title */}
       <div className="pt-10 pb-6 text-center bg-white text-black">
         <h1 className="text-7xl md:text-8xl font-serif font-bold leading-snug">
@@ -13,7 +13,6 @@ export default function HeroSection() {
           Équipe de recherche interdisciplinaire
         </p>
       </div>
-
       {/* Brain image */}
       <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
         <Image

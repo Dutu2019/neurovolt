@@ -14,7 +14,7 @@ export default function RootLayout({
       <body className={`${blinker} antialiased`}>
         <Nav />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
