@@ -1,7 +1,9 @@
 name = "neurovolt"
 compatibility_date = "2025-07-02"
-compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".next"
+
+[compatibility_flags]
+nodejs_compat = true
 
 # Production environment - only deployed from main branch
 [env.production]
