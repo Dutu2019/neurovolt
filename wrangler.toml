@@ -1,7 +1,7 @@
 name = "neurovolt"
 compatibility_date = "2025-07-02"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".next"
+pages_build_output_dir = ".vercel/output/static"
 
 # Production environment - only deployed from main branch
 [env.production]
