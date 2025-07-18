@@ -22,3 +22,18 @@
   --color-accent: #20243c;
   --color-accent-content: white;
 }
+
+/* animations */
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fade-out-4s {
+  animation: fadeOut 1s ease-in-out 4s forwards;
+}

@@ -1,31 +1,40 @@
 "use client";
 
+import { useState } from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { useState } from "react";
 import { postEmail } from "@/lib/infolettre";
+import { Toast, ToastProps } from "@/app/ui/Toast";
 
 export default function Footer() {
   const [submitActive, setSubmitActive] = useState(false);
   const [email, setEmail] = useState("");
+  const [toast, setToast] = useState<ToastProps>({ show: false, message: "" });
+
+  const toastify = (message: string, type: ToastProps["type"]) => {
+    setToast({ show: true, message, type });
+    setTimeout(() => {
+      setToast({ show: false, message: "" });
+    }, 5000);
+  };
 
   const handleEmailSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (email) {
       console.log(email);
       setSubmitActive(true);
-      try {
-        await postEmail(email);
-        setEmail("");
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setSubmitActive(false);
+      const result = await postEmail(email);
+      if (result instanceof Error) {
+        console.log(result.message);
+        toastify(result.message, "error");
+      } else {
+        toastify("Merci de vous incrire à notre infolettre!", "success");
       }
+      setSubmitActive(false);
+      setEmail("");
     }
   };
-
   return (
     <footer className="w-full bg-primary text-primary-content p-2 md:p-3">
       {/* Subscribe to newsletter */}
@@ -58,6 +67,11 @@ export default function Footer() {
           >
             {submitActive ? "Envoi en cours..." : "S'abonner"}
           </button>
+          <Toast
+            show={toast.show}
+            message={toast.message}
+            type={toast.type}
+          ></Toast>
         </div>
       </div>
 
@@ -65,7 +79,7 @@ export default function Footer() {
         <div className="relative w-full flex justify-end items-center mt-5 gap-10">
           <img
             src="/icons/mail_icon.svg"
-            className="scale-130 p-1 rounded-full hover:bg-white transition"
+            className="scale-130 p-1 rounded-full hover:bg-primary-content transition"
           />
           <img
             src="/icons/link_icon.svg"
@@ -74,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Addresses */}
-        <div className="relative w-full flex justify-between items-center">
+        <div className="relative w-full flex flex-col lg:flex-row justify-between items-center">
           <div className="flex flex-col justify-start gap-1">
             <h1 className="font-extrabold text-xl mb-1">Neurovolts</h1>
             <div className="flex items-center gap-4">
