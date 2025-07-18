@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { postEmail } from "@/lib/infolettre";
-import { Toast, ToastProps } from "@/app/ui/Toast";
+import { Toast, ToastProps } from "@/app/components/Toast";
 
 export default function Footer() {
   const [submitActive, setSubmitActive] = useState(false);
