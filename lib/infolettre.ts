@@ -1,5 +1,3 @@
-"use server";
-
 export async function postEmail(email: string) {
   if (typeof email !== "string" || !email.includes("@"))
     return new Error("Courriel invalide");
