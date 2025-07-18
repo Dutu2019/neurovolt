@@ -1,9 +1,8 @@
 "use server";
 
 import { promises as fs } from "fs";
-import path from "path";
 
-const EMAILS_FILE = path.join(process.cwd(), "emails.json");
+const EMAILS_FILE = "emails.json";
 
 // Initialize the emails file if it doesn't exist
 async function initEmailsFile() {
