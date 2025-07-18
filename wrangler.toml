@@ -10,9 +10,3 @@ name = "neurovolt-production"
 # Optional: Preview environment for other branches
 [env.preview]
 name = "neurovolt-preview"
-
-[env.preview.vars]
-GOOGLE_FORMS_LINK = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc7t_jGNJK7KVHQhxJpiATmpwiv54EwXdefFE-vWWMvpS_zWA/formResponse"
-
-[env.production.vars]
-GOOGLE_FORMS_LINK = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc7t_jGNJK7KVHQhxJpiATmpwiv54EwXdefFE-vWWMvpS_zWA/formResponse"
