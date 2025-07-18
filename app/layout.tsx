@@ -1,8 +1,10 @@
 import "./globals.css";
-import { blinker } from "@/app/ui/fonts";
+import { Blinker } from "next/font/google";
 
 import Nav from "@/app/ui/Nav";
 import Footer from "./ui/Footer";
+
+export const blinker = Blinker({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
   children,

@@ -1,27 +1,62 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { useState } from "react";
+import { postEmail } from "@/lib/infolettre";
 
 export default function Footer() {
+  const [submitActive, setSubmitActive] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleEmailSubmit = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (email) {
+      console.log(email);
+      setSubmitActive(true);
+      try {
+        await postEmail(email);
+        setEmail("");
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setSubmitActive(false);
+      }
+    }
+  };
+
   return (
-    <footer className="w-full bg-[var(--primary)] p-2 md:p-3">
+    <footer className="w-full bg-primary text-primary-content p-2 md:p-3">
       {/* Subscribe to newsletter */}
       <div className="relative w-full flex flex-col justify-center items-center">
-        <p className="font-extrabold text-2xl md:text-3xl text-white">
+        <p className="font-extrabold text-2xl md:text-3xl">
           S'inscrire à l'infolettre de NeuroVolts
         </p>
-        <p className="text-1xl md:text-2xl text-white font-semibold italic">
+        <p className="text-1xl md:text-2xl text-base font-semibold italic">
           Soyez toujours informés de nos activités et événements!
         </p>
         <div className="flex justify-center items-center gap-4 m-3">
           <input
             type="email"
             placeholder="Courriel"
+            value={email}
             className="text-lg text-center text-black placeholder-gray bg-white w-80 h-12 focus:outline-none"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <button
             type="submit"
-            className="bg-black hover:underline text-white font-semibold h-12 px-5"
+            onClick={handleEmailSubmit}
+            disabled={submitActive}
+            className={`${
+              submitActive
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-black hover:underline"
+            } text-white font-semibold h-12 px-5 transition-colors`}
           >
-            S'abonner
+            {submitActive ? "Envoi en cours..." : "S'abonner"}
           </button>
         </div>
       </div>
@@ -40,15 +75,30 @@ export default function Footer() {
 
         {/* Addresses */}
         <div className="relative w-full flex justify-between items-center">
-          <div className="flex flex-col justify-start">
-            <h1 className="font-extrabold">Neurovolts</h1>
-            Collège Jean-de-Brébeuf <br />
-            3200, chemin de la Côte-Sainte-Catherine <br />
-            Montréal (Québec) H3T 1C1 <br />
-            Téléphone : 514 342-9342 <br />
-            Courriel: Le Courriel de NeuroVolts <br />
+          <div className="flex flex-col justify-start gap-1">
+            <h1 className="font-extrabold text-xl mb-1">Neurovolts</h1>
+            <div className="flex items-center gap-4">
+              <Link
+                href={"https://maps.app.goo.gl/hdZ6qkLekfrSvhU17"}
+                className="hover:underline"
+                target="_blank"
+              >
+                Collège Jean-de-Brébeuf <br />
+                3200, chemin de la Côte-Sainte-Catherine <br />
+                Montréal (Québec) H3T 1C1
+              </Link>
+              <FaExternalLinkAlt />
+            </div>
+            <div>(514) 342-9342</div>
+            <div>erictanase2007@gmail.com</div>
           </div>
-          <img src="/logo.png" />
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={200}
+            height={400}
+            className="select-none"
+          />
           <div className="flex justify-between gap-50">
             <div className="flex flex-col items-start gap-5">
               <Link
