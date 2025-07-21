@@ -1,17 +1,27 @@
 export async function postEmail(email: string) {
   if (typeof email !== "string" || !email.includes("@"))
     return new Error("Courriel invalide");
-  const params = new URLSearchParams({ "entry.1381889827": email });
-  const res = await fetch(
-    `${process.env.GOOGLE_FORMS_LINK}?${params.toString()}`,
-    {
+
+  try {
+    const response = await fetch("/api/infolettre", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return new Error(
+        data.error ||
+          "Il y a eu une erreur inattendue. Veuillez réessayer plus tard."
+      );
     }
-  );
-  if (!res.ok) {
+
+    return data;
+  } catch (error) {
     return new Error(
       "Il y a eu une erreur inattendue. Veuillez réessayer plus tard."
     );
