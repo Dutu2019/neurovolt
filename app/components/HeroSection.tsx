@@ -3,17 +3,16 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#7B2634] text-white relative">
+    <section className="bg-primary text-primary-content relative">
       {/* Top Logo and Title */}
       <div className="pt-10 pb-6 text-center bg-white text-black">
-        <h1 className="text-7xl md:text-8xl font-serif font-bold leading-snug">
+        <h1 className="text-6xl md:text-8xl font-serif font-bold leading-snug">
           NeuroVolts
         </h1>
         <p className="mt-2 mb-30 text-3xl font-[Times] w-70 m-auto">
           Équipe de recherche interdisciplinaire
         </p>
       </div>
-
       {/* Brain image */}
       <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
         <Image
@@ -38,13 +37,14 @@ export default function HeroSection() {
             className="hidden md:block absolute fill-white opacity-15 z-0 rotate-90 scale-150 translate-x-20"
           />
 
-          <blockquote className="relative font-[Times] z-10 text-7xl font-bold leading-tight">
-            To know our <br/>brain is to know ourselves
+          <blockquote className="relative font-[Times] z-10 text-5xl md:text-7xl font-bold leading-tight">
+            To know our <br />
+            brain is to know ourselves
           </blockquote>
         </div>
 
         {/* Right column - text and button */}
-        <div className="text-xl/9 font-medium text-justify">
+        <div className="container text-xl/9 font-medium text-justify">
           <p>
             The Montreal Neurological Institute-Hospital<sup>[1]</sup> (MNI),
             also known as Montreal Neuro or The Neuro, is a research and medical
@@ -58,7 +58,7 @@ export default function HeroSection() {
           </p>
 
           <Link href="/about-us">
-            <button className="mt-4 px-40 py-2 border border-white rounded-2xl text-white hover:bg-white hover:text-[var(--primary)] transition">
+            <button className="btn btn-ghost text-lg border-white rounded-2xl w-full my-10 mx-auto">
               En savoir plus
             </button>
           </Link>
