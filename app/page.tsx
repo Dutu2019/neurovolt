@@ -16,12 +16,12 @@ export default function page() {
           <Card
             text="SYMPOSIUM"
             bgImageClasses="rotate-45 -translate-y-1/2"
-            className="bg-primary text-primary-content"
+            className="bg-white text-[#4f0d16]"
           />
           <Card
             text="JOINDRE L'ÉQUIPE"
             bgImageClasses="rotate-135"
-            className="bg-primary text-primary-content"
+            className="bg-[#4f0d16] text-primary-content"
           />
         </div>
       </section>
