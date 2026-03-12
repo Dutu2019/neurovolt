@@ -29,7 +29,7 @@ export default function TeamMember({
   return (
     <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-center">
       <div
-        className="shrink-0 w-36 h-36 md:w-40 md:h-40 overflow-hidden"
+        className="shrink-0 w-36 h-36 md:w-60 md:h-60 overflow-hidden"
         style={shieldMaskStyle}
       >
         <Image

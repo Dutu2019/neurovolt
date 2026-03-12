@@ -23,7 +23,7 @@ const chartConfig = {
 export default function NotFound() {
   return (
     <section className="relative h-screen w-full bg-[var(--primary)] contain-content">
-      <h1 className="w-fit m-auto pt-150 text-6xl md:text-9xl font-extrabold italic">
+      <h1 className="w-fit m-auto pt-150 text-6xl md:text-9xl font-extrabold italic z-10">
         En développement...
       </h1>
       <ChartContainer
@@ -41,9 +41,9 @@ export default function NotFound() {
           <Area
             dataKey="desktop"
             type="natural"
-            fill="var(--color-desktop)"
-            fillOpacity={0.4}
-            stroke="var(--color-desktop)"
+            fill="var(--color-primary)"
+            fillOpacity={1}
+            stroke="var(--color-primary)"
           />
         </AreaChart>
       </ChartContainer>

@@ -4,8 +4,7 @@ import TeamMember from "@/app/components/TeamMember";
 
 export const metadata: Metadata = {
   title: "L'équipe | NeuroVolts",
-  description:
-    "L'équipe de recherche NeuroVolts au Collège Jean-de-Brébeuf.",
+  description: "L'équipe de recherche NeuroVolts au Collège Jean-de-Brébeuf.",
 };
 
 const TEAM_MEMBERS = [
@@ -56,22 +55,19 @@ export default function TeamPage() {
     <>
       {/* Hero section */}
       <section className="relative w-full bg-base-100 pt-8 pb-12 md:pt-12 md:pb-16">
-        <div className="flex flex-col items-center justify-center max-w-5xl mx-auto px-6">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-primary text-center">
+        <div className="flex flex-col items-center justify-center max-w-8xl mx-auto px-6">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-bold text-primary text-center z-11">
             L&apos;ÉQUIPE DE RECHERCHE
           </h1>
 
-          <div className="relative mt-10 md:mt-14">
-
-              <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-3xl z-10">
-                <Image
-                  src="https://picsum.photos/800/480?random=team"
-                  alt="Équipe de recherche en laboratoire"
-                  width={800}
-                  height={480}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
+          <div className="rounded-2xl overflow-hidden shadow-lg max-w-7xl w-full z-10 -translate-y-1">
+            <Image
+              src="https://picsum.photos/800/480?random=team"
+              alt="Équipe de recherche en laboratoire"
+              width={800}
+              height={480}
+              className="w-full h-auto object-cover"
+            />
           </div>
         </div>
       </section>
@@ -89,7 +85,7 @@ export default function TeamPage() {
           />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-6 flex flex-col gap-14 md:gap-16">
+        <div className="relative max-w-7xl mx-auto px-6 flex flex-col gap-14 md:gap-16">
           {TEAM_MEMBERS.map((member, index) => (
             <TeamMember
               key={index}
