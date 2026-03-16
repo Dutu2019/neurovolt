@@ -23,7 +23,7 @@ const chartConfig = {
 export default function NotFound() {
   return (
     <section className="relative h-screen w-full bg-[var(--primary)] contain-content">
-      <h1 className="w-fit m-auto pt-150 text-6xl md:text-9xl font-extrabold italic z-10">
+      <h1 className="relative w-fit m-auto pt-150 text-6xl md:text-9xl font-extrabold italic z-10">
         En développement...
       </h1>
       <ChartContainer
