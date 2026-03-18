@@ -2,6 +2,8 @@ import React from "react";
 import ArticleItem from "../components/ArticleItem";
 import { ArticleContent, getAllArticles } from "@/lib/content";
 
+export const runtime = "edge";
+
 export default async function ArticlesPage() {
   const articles: ArticleContent[] = await getAllArticles();
   return (
