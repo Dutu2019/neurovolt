@@ -1,5 +1,5 @@
-import { readFile, readdir, stat } from "fs/promises";
-import path from "path";
+import { readFile, readdir, stat } from "node:fs/promises";
+import path from "node:path";
 import matter from "gray-matter";
 import { assertServerOnly, ARTICLES_DIR } from "@/lib/content/fs";
 import type { ArticleContent, ContentImageRef } from "@/lib/content/types";

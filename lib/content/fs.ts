@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 
 export const CONTENT_ROOT = path.join(process.cwd(), "public", "content");
 export const PROJECTS_DIR = path.join(CONTENT_ROOT, "projects");
@@ -10,4 +10,3 @@ export function assertServerOnly() {
     throw new Error("content fs utilities must only run on the server");
   }
 }
-
