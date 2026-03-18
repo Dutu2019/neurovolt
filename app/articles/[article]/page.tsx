@@ -2,6 +2,9 @@ import React from "react";
 import DocRenderer from "@/app/components/DocRenderer";
 import { getExampleArticle, getAllArticles } from "@/lib/content";
 
+export const dynamic = "force-static";
+export const dynamicParams = false; // Essential for Cloudflare SSG
+
 export async function generateStaticParams() {
   const articleSlugs = (await getAllArticles()).map((article) => article.slug);
 
