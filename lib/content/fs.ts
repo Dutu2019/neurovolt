@@ -1,4 +1,4 @@
-import path from "node:path";
+import path from "path";
 
 export const CONTENT_ROOT = path.join(process.cwd(), "public", "content");
 export const PROJECTS_DIR = path.join(CONTENT_ROOT, "projects");

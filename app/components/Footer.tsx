@@ -22,11 +22,10 @@ export default function Footer() {
   const handleEmailSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (email) {
-      console.log(email);
       setSubmitActive(true);
       const result = await postEmail(email);
       if (result instanceof Error) {
-        console.log(result.message);
+        console.error(result.message);
         toastify(result.message, "error");
       } else {
         toastify("Merci de vous incrire à notre infolettre!", "success");

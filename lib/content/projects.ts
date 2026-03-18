@@ -1,5 +1,5 @@
-import { readdir, readFile, stat } from "node:fs/promises";
-import path from "node:path";
+import { readdir, readFile, stat } from "fs/promises";
+import path from "path";
 import YAML from "yaml";
 import { assertServerOnly, PROJECTS_DIR } from "@/lib/content/fs";
 import type { ContentImageRef, ProjectContent } from "@/lib/content/types";
