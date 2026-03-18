@@ -12,6 +12,7 @@
     "deploy": "pnpm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+    "docx-preview": "^0.3.7",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.38",
     "lucide-react": "^0.512.0",

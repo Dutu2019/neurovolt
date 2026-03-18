@@ -1,3 +1,4 @@
+'use server';
 import { readdir, readFile, stat } from "fs/promises";
 import path from "path";
 import YAML from "yaml";
