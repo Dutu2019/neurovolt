@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 interface articleProps {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string;
   slug?: string;
   inverse?: boolean;
   className?: string;
@@ -52,15 +52,17 @@ export default function ArticleHero({
       </div>
 
       {/* Right Image Section */}
-      <div className="w-full md:w-1/2 relative h-[300px] md:h-auto">
-        <Image
-          src={imageSrc}
-          width={1000}
-          height={600}
-          alt="Article visual"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
+      {imageSrc && (
+        <div className="w-full md:w-1/2 relative h-[300px] md:h-auto">
+          <Image
+            src={imageSrc}
+            width={1000}
+            height={600}
+            alt="Article visual"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ export type ContentImageRef =
        * Note: content/ is not automatically web-served; this is a reference.
        */
       kind: "content-file";
-      relativePath: string;
+      url: string;
     }
   | {
       /**

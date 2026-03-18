@@ -22,7 +22,7 @@ function toImageRef(value: unknown): ContentImageRef | undefined {
   ) {
     return { kind: "url", url: value };
   }
-  return { kind: "content-file", relativePath: value };
+  return { kind: "content-file", url: value };
 }
 
 function slugFromFilename(filename: string) {
@@ -98,7 +98,7 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
       tags: fm.tags,
       coverImage:
         cover?.kind === "content-file"
-          ? { kind: "url", url: toPublicUrl(cover.relativePath) }
+          ? { kind: "url", url: toPublicUrl(cover.url) }
           : cover,
       body: content,
       _absolutePath: usePath,

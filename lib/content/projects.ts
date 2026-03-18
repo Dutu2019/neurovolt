@@ -17,15 +17,21 @@ type ProjectYaml = {
 
 function toImageRef(value: unknown): ContentImageRef | undefined {
   if (typeof value !== "string" || !value.trim()) return undefined;
-  if (value.startsWith("/") || value.startsWith("http://") || value.startsWith("https://")) {
+  if (
+    value.startsWith("/") ||
+    value.startsWith("http://") ||
+    value.startsWith("https://")
+  ) {
     return { kind: "url", url: value };
   }
-  return { kind: "content-file", relativePath: value };
+  return { kind: "content-file", url: value };
 }
 
 function toImageRefs(values: unknown): ContentImageRef[] | undefined {
   if (!Array.isArray(values)) return undefined;
-  const refs = values.map((v) => toImageRef(v)).filter(Boolean) as ContentImageRef[];
+  const refs = values
+    .map((v) => toImageRef(v))
+    .filter(Boolean) as ContentImageRef[];
   return refs.length ? refs : undefined;
 }
 
@@ -36,7 +42,11 @@ async function listAssetFiles(projectDir: string) {
   for (const entry of entries) {
     if (entry.isDirectory()) continue;
     const name = entry.name;
-    if (name.toLowerCase() === "project.yml" || name.toLowerCase() === "project.yaml") continue;
+    if (
+      name.toLowerCase() === "project.yml" ||
+      name.toLowerCase() === "project.yaml"
+    )
+      continue;
     files.push(name);
   }
 
@@ -57,8 +67,14 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
     const ymlPath = path.join(absDir, "project.yml");
     const yamlPath = path.join(absDir, "project.yaml");
 
-    const ymlExists = await stat(ymlPath).then(() => true).catch(() => false);
-    const yamlExists = !ymlExists && (await stat(yamlPath).then(() => true).catch(() => false));
+    const ymlExists = await stat(ymlPath)
+      .then(() => true)
+      .catch(() => false);
+    const yamlExists =
+      !ymlExists &&
+      (await stat(yamlPath)
+        .then(() => true)
+        .catch(() => false));
 
     if (!ymlExists && !yamlExists) continue;
 
@@ -71,7 +87,8 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
 
     const assetFiles = await listAssetFiles(absDir);
 
-    const toPublicUrl = (rel: string) => `/content/projects/${encodeURIComponent(slug)}/${rel}`;
+    const toPublicUrl = (rel: string) =>
+      `/content/projects/${encodeURIComponent(slug)}/${rel}`;
     const cover = toImageRef(parsed.coverImage);
     const gallery = toImageRefs(parsed.gallery);
 
@@ -84,10 +101,12 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
       links: parsed.links,
       coverImage:
         cover?.kind === "content-file"
-          ? { kind: "url", url: toPublicUrl(cover.relativePath) }
+          ? { kind: "url", url: toPublicUrl(cover.url) }
           : cover,
       gallery: gallery?.map((img) =>
-        img.kind === "content-file" ? { kind: "url", url: toPublicUrl(img.relativePath) } : img
+        img.kind === "content-file"
+          ? { kind: "url", url: toPublicUrl(img.url) }
+          : img,
       ),
       assetFiles,
       _absoluteDir: absDir,
@@ -98,8 +117,9 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
   return projects;
 }
 
-export async function getProjectBySlug(slug: string): Promise<ProjectContent | null> {
+export async function getProjectBySlug(
+  slug: string,
+): Promise<ProjectContent | null> {
   const all = await getAllProjects();
   return all.find((p) => p.slug === slug) ?? null;
 }
-
