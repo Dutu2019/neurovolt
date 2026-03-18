@@ -15,7 +15,11 @@ type ArticleFrontmatter = {
 
 function toImageRef(value: unknown): ContentImageRef | undefined {
   if (typeof value !== "string" || !value.trim()) return undefined;
-  if (value.startsWith("/") || value.startsWith("http://") || value.startsWith("https://")) {
+  if (
+    value.startsWith("/") ||
+    value.startsWith("http://") ||
+    value.startsWith("https://")
+  ) {
     return { kind: "url", url: value };
   }
   return { kind: "content-file", relativePath: value };
@@ -29,35 +33,37 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
   assertServerOnly();
 
   const entries = await readdir(ARTICLES_DIR, { withFileTypes: true });
-  const fileEntries = entries.filter((e) => e.isFile() && /\.mdx?$/i.test(e.name)).map((e) => e.name);
+  const fileEntries = entries
+    .filter((e) => e.isFile() && /\.mdx?$/i.test(e.name))
+    .map((e) => e.name);
   const dirEntries = entries.filter((e) => e.isDirectory()).map((e) => e.name);
 
   const articles: ArticleContent[] = [];
 
-  // 1) Support legacy flat files: public/content/articles/<slug>.md
-  for (const fileName of fileEntries) {
-    const absPath = path.join(ARTICLES_DIR, fileName);
-    const raw = await readFile(absPath, "utf8");
-    const { data, content } = matter(raw);
-    const fm = data as ArticleFrontmatter;
-    const slug = slugFromFilename(fileName);
+  // // 1) Support legacy flat files: public/content/articles/<slug>.md
+  // for (const fileName of fileEntries) {
+  //   const absPath = path.join(ARTICLES_DIR, fileName);
+  //   const raw = await readFile(absPath, "utf8");
+  //   const { data, content } = matter(raw);
+  //   const fm = data as ArticleFrontmatter;
+  //   const slug = slugFromFilename(fileName);
 
-    const cover = toImageRef(fm.coverImage);
-    const toPublicUrl = (rel: string) => `/content/articles/${encodeURIComponent(slug)}/${rel}`;
+  //   const cover = toImageRef(fm.coverImage);
+  //   const toPublicUrl = (rel: string) => `/content/articles/${encodeURIComponent(slug)}/${rel}`;
 
-    articles.push({
-      slug,
-      title: (fm.title || slug).toString(),
-      author: fm.author,
-      date: fm.date,
-      description: fm.description,
-      tags: fm.tags,
-      coverImage:
-        cover?.kind === "content-file" ? { kind: "url", url: toPublicUrl(cover.relativePath) } : cover,
-      body: content,
-      _absolutePath: absPath,
-    });
-  }
+  //   articles.push({
+  //     slug,
+  //     title: (fm.title || slug).toString(),
+  //     author: fm.author,
+  //     date: fm.date,
+  //     description: fm.description,
+  //     tags: fm.tags,
+  //     coverImage:
+  //       cover?.kind === "content-file" ? { kind: "url", url: toPublicUrl(cover.relativePath) } : cover,
+  //     body: content,
+  //     _absolutePath: absPath,
+  //   });
+  // }
 
   // 2) Folder-based articles: public/content/articles/<slug>/article.md (or index.md)
   for (const dirName of dirEntries) {
@@ -66,8 +72,12 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
     const indexMd = path.join(absDir, "index.md");
 
     const usePath =
-      (await stat(articleMd).then(() => articleMd).catch(() => null)) ??
-      (await stat(indexMd).then(() => indexMd).catch(() => null));
+      (await stat(articleMd)
+        .then(() => articleMd)
+        .catch(() => null)) ??
+      (await stat(indexMd)
+        .then(() => indexMd)
+        .catch(() => null));
 
     if (!usePath) continue;
 
@@ -76,7 +86,8 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
     const fm = data as ArticleFrontmatter;
     const slug = dirName;
     const cover = toImageRef(fm.coverImage);
-    const toPublicUrl = (rel: string) => `/content/articles/${encodeURIComponent(slug)}/${rel}`;
+    const toPublicUrl = (rel: string) =>
+      `/content/articles/${encodeURIComponent(slug)}/${rel}`;
 
     articles.push({
       slug,
@@ -86,19 +97,38 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
       description: fm.description,
       tags: fm.tags,
       coverImage:
-        cover?.kind === "content-file" ? { kind: "url", url: toPublicUrl(cover.relativePath) } : cover,
+        cover?.kind === "content-file"
+          ? { kind: "url", url: toPublicUrl(cover.relativePath) }
+          : cover,
       body: content,
       _absolutePath: usePath,
     });
   }
 
   // newest first if dates are ISO strings; fallback to title
-  articles.sort((a, b) => (b.date || "").localeCompare(a.date || "") || a.title.localeCompare(b.title));
+  articles.sort(
+    (a, b) =>
+      (b.date || "").localeCompare(a.date || "") ||
+      a.title.localeCompare(b.title),
+  );
   return articles;
 }
 
-export async function getArticleBySlug(slug: string): Promise<ArticleContent | null> {
+export async function getArticleBySlug(
+  slug: string,
+): Promise<ArticleContent | null> {
   const all = await getAllArticles();
   return all.find((a) => a.slug === slug) ?? null;
 }
 
+export async function getExampleArticle(slug: string): Promise<ArticleContent> {
+  const examplePath = path.join(ARTICLES_DIR, slug, "article.html");
+  const raw = await readFile(examplePath, "utf8");
+  return {
+    slug,
+    title: slug,
+    description: "An example article demonstrating the content structure.",
+    body: raw,
+    _absolutePath: examplePath,
+  };
+}

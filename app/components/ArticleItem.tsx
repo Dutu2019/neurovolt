@@ -1,30 +1,28 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface articleProps {
   title: string;
   description: string;
   imageSrc: string;
+  slug?: string;
   inverse?: boolean;
   className?: string;
 }
 
-/**
- * ArticleHero Component
- * * A visually identical reproduction of the provided UI design.
- * Features a burgundy text card with a double-border effect
- * and a side-aligned image.
- * * @param {string} title - The main heading of the article
- * @param {string} description - The introductory text
- * @param {string} imageSrc - URL for the right-side image
- */
 export default function ArticleHero({
   title,
   description,
   imageSrc,
+  slug,
   inverse = false,
   className,
 }: articleProps) {
+  const router = useRouter();
+
   return (
     <div
       className={`flex flex-col md:flex-row ${inverse && "md:flex-row-reverse"} w-full min-h-[400px] overflow-hidden bg-black font-sans ${className || ""}`}
@@ -43,8 +41,11 @@ export default function ArticleHero({
               {description}
             </p>
 
-            <button className="self-start border border-white rounded-full px-12 py-2 text-white hover:bg-white hover:text-[#702028] transition-all duration-300 font-medium">
-              Lire la suite
+            <button
+              className="self-start border border-white rounded-full px-12 py-2 text-white hover:bg-white hover:text-[#702028] transition-all duration-300 font-medium"
+              onClick={() => slug && router.push(`/articles/${slug}`)}
+            >
+              {slug ? "Lire l'article" : "En savoir plus"}
             </button>
           </div>
         </div>

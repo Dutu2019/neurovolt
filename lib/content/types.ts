@@ -49,4 +49,3 @@ export interface ArticleContent {
    */
   _absolutePath: string;
 }
-
