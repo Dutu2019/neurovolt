@@ -2,6 +2,7 @@ import React from "react";
 import DocRenderer from "@/app/components/DocRenderer";
 import { getExampleArticle, getAllArticles } from "@/lib/content";
 
+export const runtime = "edge";
 export const dynamic = "force-static";
 export const dynamicParams = false; // Essential for Cloudflare SSG
 

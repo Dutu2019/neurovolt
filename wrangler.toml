@@ -3,10 +3,6 @@ compatibility_date = "2025-07-02"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
-[vars]
-# This tells the adapter to default to edge
-NEXTJS_ENV = "production"
-
 # Production environment - only deployed from main branch
 [env.production]
 name = "neurovolt-production"
