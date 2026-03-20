@@ -3,9 +3,6 @@ compatibility_date = "2025-07-02"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
-[build]
-command = "pnpm run pages:build"
-
 # Production environment - only deployed from main branch
 [env.production]
 name = "neurovolt-production"
