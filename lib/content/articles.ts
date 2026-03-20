@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import { readFile, readdir, stat } from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
@@ -101,7 +101,7 @@ export async function getAllArticles(): Promise<ArticleContent[]> {
         cover?.kind === "content-file"
           ? { kind: "url", url: toPublicUrl(cover.url) }
           : cover,
-      body: new Uint8Array(Buffer.from(content)),
+      body: content,
       _absolutePath: usePath,
     });
   }
@@ -123,8 +123,8 @@ export async function getArticleBySlug(
 }
 
 export async function getExampleArticle(slug: string): Promise<ArticleContent> {
-  const examplePath = path.join(ARTICLES_DIR, slug, "article.docx");
-  const raw = new Uint8Array(await readFile(examplePath));
+  const examplePath = path.join(ARTICLES_DIR, slug, "article.html");
+  const raw = await readFile(examplePath, "utf8");
   return {
     slug,
     title: slug,

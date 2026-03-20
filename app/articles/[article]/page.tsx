@@ -1,10 +1,9 @@
 import React from "react";
 import DocRenderer from "@/app/components/DocRenderer";
-import DocxRenderer from "@/app/components/DocxRenderer"
 import { getExampleArticle, getAllArticles } from "@/lib/content";
 
 export const dynamic = "force-static";
-export const dynamicParams = false; // Essential for Cloudflare SSG
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const articleSlugs = (await getAllArticles()).map((article) => article.slug);
@@ -22,9 +21,6 @@ export default async function Article({
   const { article: slug } = await params;
   const articleContent = (await getExampleArticle(slug)).body;
   return (
-    // <div className="max-w-7xl m-auto">
-    //   <DocRenderer html={articleContent} />
-    // </div>
-    <DocxRenderer fileBuffer="hello"/>
+    <DocRenderer html={articleContent} />
   );
 }

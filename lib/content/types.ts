@@ -43,7 +43,7 @@ export interface ArticleContent {
   description?: string;
   tags?: string[];
   coverImage?: ContentImageRef;
-  body: Uint8Array;
+  body: string;
   /**
    * Absolute path on disk (server-only).
    */
