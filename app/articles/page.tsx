@@ -3,6 +3,7 @@ import ArticleItem from "../components/ArticleItem";
 import { ArticleContent, getAllArticles } from "@/lib/content";
 
 export const dynamic = "force-static";
+export const revalidate = false;
 
 export default async function ArticlesPage() {
   try {
