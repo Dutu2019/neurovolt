@@ -7,9 +7,9 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const articleSlugs = (await getAllArticles()).map((article) => article.slug);
-
+  
   return articleSlugs.map((slug) => ({
-    slug,
+    article: slug,
   }));
 }
 
