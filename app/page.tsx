@@ -1,5 +1,5 @@
 import HeroSection from "@/app/components/HeroSection";
-import Card from "@/app/components/Card";
+import Card from "@/app/components/HomeCard";
 
 export default function page() {
   return (

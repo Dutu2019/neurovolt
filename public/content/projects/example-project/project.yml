@@ -1,0 +1,15 @@
+slug: example-project
+title: Example Project
+shortDescription: A short one-liner for cards.
+description: >
+  A longer description that can span multiple lines and is great for a details page.
+tags:
+  - neurology
+  - research
+links:
+  website: https://example.com
+  github: https://github.com/example/example
+coverImage: cover.jpg
+gallery:
+  - lab-1.jpg
+  - lab-2.jpg

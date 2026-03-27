@@ -1,12 +1,10 @@
+"$schema" = "./node_modules/wrangler/config-schema.json"
+main = ".open-next/worker.js"
 name = "neurovolt"
-compatibility_date = "2025-07-02"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+# Set this to today's date
+compatibility_date = "2026-03-21"
+compatibility_flags = [ "nodejs_compat" ]
 
-# Production environment - only deployed from main branch
-[env.production]
-name = "neurovolt-production"
-
-# Optional: Preview environment for other branches
-[env.preview]
-name = "neurovolt-preview"
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
