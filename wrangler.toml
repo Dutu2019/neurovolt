@@ -1,10 +1,4 @@
-"$schema" = "./node_modules/wrangler/config-schema.json"
-main = ".open-next/worker.js"
 name = "neurovolt"
-# Set this to today's date
-compatibility_date = "2026-03-21"
+compatibility_date = "2026-03-29"
 compatibility_flags = [ "nodejs_compat" ]
-
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
+pages_build_output_dir = ".vercel/output/static"
